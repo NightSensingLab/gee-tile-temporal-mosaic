@@ -1,5 +1,14 @@
 # Selection Design
 
+## Contents
+
+- [Geometry stage](#1-geometry-stage)
+- [Candidate table](#2-candidate-table)
+- [Coupled search](#3-coupled-search)
+- [Overlap semantics](#4-overlap-semantics)
+- [Fallback ladder](#5-fallback-ladder)
+- [Recommended diagnostics](#6-recommended-diagnostics)
+
 ## 1. Geometry stage
 
 The geometric stage chooses the fewest tile IDs capable of covering the ROI. For an ordered tile list `T`, define:

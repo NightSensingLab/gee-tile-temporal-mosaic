@@ -1,6 +1,13 @@
 # Sentinel-2 JavaScript Pattern
 
+## Contents
+
+- [Core Code Editor pattern](#core-code-editor-pattern)
+- [Adaptation rules](#adaptation-rules)
+
 This is a Code Editor pattern for producing ROI-local metrics. It intentionally stops before a project-specific tile set and candidate table are chosen; use the selection rules in [selection-design.md](selection-design.md) to select one scene per tile before assembling the final mosaic.
+
+## Core Code Editor pattern
 
 ```javascript
 // Replace these placeholders in the Code Editor.

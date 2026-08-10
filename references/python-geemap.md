@@ -1,6 +1,13 @@
 # Python/geemap Pattern
 
+## Contents
+
+- [Core Python pattern](#core-python-pattern)
+- [Python-specific guardrails](#python-specific-guardrails)
+
 Use the same parameter names and selection semantics as the JavaScript reference. The following pattern creates ROI-local Sentinel-2 candidates; the tile set and coupled scene search remain project-specific.
+
+## Core Python pattern
 
 ```python
 import ee

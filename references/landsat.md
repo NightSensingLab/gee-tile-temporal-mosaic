@@ -1,5 +1,11 @@
 # Landsat Collection 2 Reference
 
+## Contents
+
+- [Collections](#collections)
+- [QA mask](#qa-mask)
+- [Sensor mixing](#sensor-mixing)
+
 Use this reference when the task needs Landsat Collection 2 Level-2 rather than Sentinel-2. Keep the tile-level selection and overlap rules from the main skill unchanged.
 
 ## Collections

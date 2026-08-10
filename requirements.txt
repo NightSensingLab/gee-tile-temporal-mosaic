@@ -1,0 +1,5 @@
+# Only needed when running the Python/geemap reference outside Earth Engine's
+# Code Editor. Versions are intentionally unpinned because the Earth Engine
+# Python API and geemap release independently.
+earthengine-api
+geemap
