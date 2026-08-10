@@ -6,6 +6,10 @@
   <a href="README.md">English</a>
 </p>
 
+<p align="center">
+  <img src="assets/gee-tile-temporal-mosaic-workflow.png" alt="Tile 级时间协调 GEE 影像合成示意图">
+</p>
+
 这是一个面向 Google Earth Engine 的研究型 skill：在尽可能少的 Sentinel-2
 或 Landsat tile 中，为研究区构建空间完整、低云量、时间尽量协调的影像合成。
 
@@ -122,4 +126,3 @@ Drive 导出必须显式开启。
 
 本仓库原创 skill 文件采用 MIT License。数据集和 Earth Engine 数据集合仍遵循各自提供方的许可，
 详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-

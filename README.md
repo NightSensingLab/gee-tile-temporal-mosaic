@@ -6,6 +6,10 @@
   <a href="README_CN.md">中文说明</a>
 </p>
 
+<p align="center">
+  <img src="assets/gee-tile-temporal-mosaic-workflow.png" alt="Illustrated workflow for a tile-level temporally coordinated GEE mosaic">
+</p>
+
 Google Earth Engine skill for building a spatially complete, low-cloud ROI
 mosaic from the fewest required Sentinel-2 or Landsat tiles while keeping each
 tile tied to one selected acquisition.
@@ -146,4 +150,3 @@ when a selected tile is cloudy.
 The original skill files are released under the MIT License. Dataset terms and
 Earth Engine collection terms remain governed by their respective providers;
 see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
