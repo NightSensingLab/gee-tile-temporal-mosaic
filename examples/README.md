@@ -13,3 +13,4 @@ For runnable code patterns, use:
 - [Sentinel-2 JavaScript](../references/sentinel2-javascript.md)
 - [Python/geemap](../references/python-geemap.md)
 - [Selection design](../references/selection-design.md)
+- [Handoff and report output](../references/handoff-output.md)

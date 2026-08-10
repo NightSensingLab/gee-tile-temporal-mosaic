@@ -12,6 +12,10 @@ clear coverage, masked-gap fraction, and fallback state. Do not use
 qualityMosaic or cross-date median.
 ```
 
+Before running, ask whether the user wants native Code Editor JavaScript,
+Python/geemap, or both. The selected backend must determine the primary script;
+the response must also include a copy-paste import/mask/mosaic handoff.
+
 ## Expected decisions
 
 1. Treat the result as one global best seasonal mosaic across the full five-year
@@ -33,6 +37,9 @@ The response should print or attach:
 - local cloud/clear/coverage metrics per tile;
 - final clear coverage and masked-gap fraction;
 - date span, selection policy, overlap mode, and fallback state.
+- a copy-paste script importing exactly one selected scene per tile, applying the
+  same mask, and exposing `mosaic` for later clipping and analysis;
+- a preview artifact appropriate to the selected backend.
 
 The response should explicitly state that it did not use `qualityMosaic`,
 cross-date median, or implicit per-pixel date selection.

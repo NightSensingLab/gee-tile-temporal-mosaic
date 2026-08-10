@@ -1,7 +1,7 @@
 interface:
   display_name: "GEE Tile Temporal Mosaic"
   short_description: "Build date-coherent, low-cloud ROI mosaics"
-  default_prompt: "Use $gee-tile-temporal-mosaic to select the minimum tile set and build a time-coordinated GEE mosaic for my ROI."
+  default_prompt: "Use $gee-tile-temporal-mosaic to select the minimum tile set and build a time-coordinated GEE mosaic for my ROI. Ask whether I want native GEE JavaScript, Python/geemap, or both, then return a preview, diagnostics, and copy-paste scene import plus priority mosaic code."
 
 policy:
   allow_implicit_invocation: true

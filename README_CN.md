@@ -34,7 +34,7 @@ tile 选择一景完整影像，先评价多个基础 tile 日期候选，再协
 
 - OpenAI Codex：安装到 `~/.codex/skills`。
 - Claude Code：安装到 `~/.claude/skills`。
-- 支持 GEE Code Editor JavaScript 和 Earth Engine Python API/geemap，调用时由用户选择。
+- 支持 GEE Code Editor JavaScript 和 Earth Engine Python API/geemap。执行前必须询问用户选择后端，不能静默默认。
 
 该仓库只包含 skill 指令和参考模板，不包含 Earth Engine 凭证、Cloud Project ID、
 ROI asset 或其他私有数据。
@@ -73,6 +73,11 @@ git clone https://github.com/NightSensingLab/gee-tile-temporal-mosaic.git \
 5. 使用阈值和最大日期差作为硬约束，再按最终清晰覆盖率、masked 缺口、日期跨度和目标日期距离排序。
 6. 按固定 tile 优先级进行拼接，并输出每个 tile 的 scene ID、日期、云量、覆盖和回退状态。
 
+每次执行还必须提供便于后续研究的交付包：快览图、选景报告，以及可以直接复制使用的
+`import + mask + mosaic` 代码。代码只导入最终选中的一景/ tile，重新应用相同掩膜，暴露
+`mosaic`/`composite` 变量，用户随后可以自行 `clip`、计算指数或创建导出任务。不得把未经筛选的
+时间集合传给 `mosaic`，也不得改用 `qualityMosaic` 或跨日期 `median`。
+
 如果没有合格组合，返回 `incomplete_masked` 或 `no_solution`，不会静默扩大时间范围。
 
 ## 仓库结构
@@ -107,6 +112,33 @@ examples/                        真实请求和预期诊断示例
 日期差和重叠区语义。使用 PROJECT_ID 初始化 Earth Engine，保持 reducer 在服务端运行，
 Drive 导出必须显式开启。
 ```
+
+### 后端选择与交付
+
+如果用户没有指定代码后端，开始查询 Earth Engine 前先询问：
+
+```text
+你希望使用 GEE Code Editor 原生 JavaScript、Python/geemap，还是两者都要？
+```
+
+原生 JavaScript 模式输出可直接粘贴到 GEE 网页的脚本，包含 `Map.addLayer` 和 `print`。
+Python/geemap 模式输出本地脚本、可查看的 HTML/PNG 快览，以及相同选景结果的复制代码。
+两种模式都要在报告中给出 tile ID、scene ID、UTC 日期、ROI 局部云量、覆盖度、最终可见清晰率、
+masked 缺口、tile 优先级和 fallback/status。
+
+报告中的复制代码至少应呈现以下结构，并替换成实际选中的 scene ID：
+
+```javascript
+var sceneLower = maskScene(ee.Image('DATASET/LOWER_SCENE_ID'));
+var sceneAnchor = maskScene(ee.Image('DATASET/ANCHOR_SCENE_ID'));
+var mosaic = ee.ImageCollection.fromImages([
+  sceneLower,   // 低优先级 tile 在前
+  sceneAnchor   // 基础 tile 最后，位于上层
+]).mosaic();
+var clipped = mosaic.clip(roi);
+```
+
+复制代码必须包含与选景阶段一致的云、云影、卷云/雪、饱和度掩膜和比例因子处理，不能只给裸的影像 ID。
 
 ### 严格 tile 归属
 

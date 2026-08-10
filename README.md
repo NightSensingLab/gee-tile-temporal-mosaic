@@ -40,7 +40,8 @@ upper tile's masked gap, but cannot replace a valid upper-tile pixel.
 - OpenAI Codex: install the repository as a skill folder under `~/.codex/skills`.
 - Claude Code: install the same repository under `~/.claude/skills`.
 - GEE Code Editor JavaScript and Earth Engine Python API/geemap are both
-  supported. Choose the language per task.
+  supported. The agent must ask which backend to use before querying Earth
+  Engine; it must not silently choose one.
 
 The package contains instructions and reference templates. Earth Engine access,
 authentication, a Cloud Project ID, and an ROI are supplied by the user at run
@@ -85,6 +86,12 @@ Install the complete repository. The root `SKILL.md`, `agents/openai.yaml`, and
 5. Assemble the chosen images in explicit tile priority order and report the
    selected scene/date and quality diagnostics for every tile.
 
+Every run also produces a practical handoff: a preview, a selection report,
+and a short copy-paste script that imports the exact selected scenes, reapplies
+the same mask, and builds the priority mosaic. The script exposes `mosaic` for
+clipping and downstream analysis. It never substitutes an unfiltered
+collection, `qualityMosaic`, or cross-date `median`.
+
 The skill does not use `qualityMosaic` or a cross-date `median` by default.
 If no acceptable combination exists, it returns an explicit incomplete or
 no-solution state rather than silently expanding the time window.
@@ -124,6 +131,20 @@ selection, local cloud metrics, date-gap constraint, and overlap semantics.
 Initialize Earth Engine with PROJECT_ID, keep server-side reducers, and make
 Drive export opt-in.
 ```
+
+### Backend choice and handoff
+
+If the request does not specify a backend, ask before running:
+
+```text
+Use native GEE Code Editor JavaScript, Python/geemap, or both?
+```
+
+Native JavaScript returns a Code Editor script with `Map.addLayer` and `print`.
+Python/geemap returns the local script plus a geemap HTML/PNG preview. Both
+variants include a report with tile IDs, scene IDs, UTC dates, ROI-local cloud
+fractions, coverage, final visible clear/gap, overlap order, and fallback
+state, followed by a copy-paste `import + mask + mosaic` block.
 
 ### Strict temporal ownership
 

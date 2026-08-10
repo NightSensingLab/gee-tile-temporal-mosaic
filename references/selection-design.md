@@ -99,3 +99,9 @@ Attach image properties or a companion FeatureCollection containing:
 - visible contribution by tile after priority layering;
 - `final_clear_fraction`, `final_masked_gap_fraction`, `date_span_days`;
 - `selection_policy`, `overlap_mode`, and fallback fields.
+
+The final response should include a compact handoff using the selected scene IDs,
+not only the diagnostic table. The handoff must reapply the same mask and scale
+transform, import exactly one scene per required tile, preserve the reported
+priority order, and expose `mosaic`/`composite` for downstream clipping and
+analysis. See [handoff-output.md](handoff-output.md).
